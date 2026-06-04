@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sonuçlar - Go-st</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Go-st Logo">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Ana Sayfa</a></li>
+        <li><a href="{{ url_for('explore') }}">Keşfet</a></li>
+        <li><a href="{{ url_for('about') }}">Hakkımızda</a></li>
+        <li><a href="{{ url_for('contact') }}">İletişim</a></li>
+    </ul>
+</nav>
+
+<section class="results-header">
+    <h1>Size Uygun Oteller</h1>
+    <p>Seçtiğiniz kriterlere göre önerilen konaklama seçenekleri</p>
+
+    <h2>
+        {{ country }} için en uygun {{ vacation_type }} tatil seçenekleri
+    </h2>
+
+    <p class="result-count">
+        {{ hotels|length }} otel bulundu
+    </p>
+</section>
+
+<section class="selected-filters">
+    <p><strong>Ülke:</strong> {{ country }}</p>
+    <p><strong>Tatil Türü:</strong> {{ vacation_type }}</p>
+    <p><strong>Bütçe:</strong> {{ budget }}</p>
+</section>
+
+<section class="results-container">
+    {% if hotels %}
+        {% for hotel in hotels %}
+            <div class="hotel-card">
+                <img src="{{ hotel.image }}" alt="Hotel">
+
+                <h3>{{ hotel.name }}</h3>
+                <p class="hotel-country">{{ hotel.country }}</p>
+                <p class="rating">
+{% if hotel.rating == "Puan bilgisi yok" %}
+    ⭐ Puan yok
+{% else %}
+    ⭐ {{ hotel.rating }} / 5
+{% endif %}
+</p>
+                {% if hotel.distance %}
+    <p class="distance-info">
+    📍 {{ hotel.distance }} km uzaklıkta
+</p>
+{% endif %}
+                <p class="price">{{ hotel.price }}</p>
+
+<a href="{{ url_for('api_hotel_detail', hotel_index=hotel.api_id) }}" class="detail-btn">
+    Detay
+</a>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <h3>😕 Sonuç bulunamadı</h3>
+            <p>Seçtiğin kriterlere uygun otel bulamadık.</p>
+
+            <a href="{{ url_for('home') }}" class="detail-btn">
+                Ana sayfaya dön
+            </a>
+        </div>
+    {% endif %}
+</section>
+
+<footer>
+    <p>&copy; 2026 Go-st - Tüm hakları saklıdır.</p>
+</footer>
+
+</body>
+</html>

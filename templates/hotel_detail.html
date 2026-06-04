@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Otel Detay - Go-st</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">
+        <a href="{{ url_for('home') }}">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Go-st Logo">
+        </a>
+    </div>
+
+    <ul class="nav-links">
+        <li><a href="{{ url_for('home') }}">Ana Sayfa</a></li>
+        <li><a href="{{ url_for('explore') }}">Keşfet</a></li>
+        <li><a href="{{ url_for('about') }}">Hakkımızda</a></li>
+        <li><a href="{{ url_for('contact') }}">İletişim</a></li>
+    </ul>
+</nav>
+
+<section class="hotel-layout">
+
+    <div class="hotel-left">
+
+        <div class="gallery">
+            <img src="{{ hotel.image }}" alt="Hotel">
+            <img src="{{ hotel.image }}" alt="Hotel">
+        </div>
+
+        <div class="bottom-section">
+
+            <div class="map-box">
+                <h3>Konum Haritası</h3>
+
+                {% if hotel.latitude and hotel.longitude %}
+                <iframe
+                    width="100%"
+                    height="300"
+                    style="border:0; border-radius:12px;"
+                    loading="lazy"
+                    src="https://www.openstreetmap.org/export/embed.html?bbox={{ hotel.longitude|float - 0.01 }},{{ hotel.latitude|float - 0.01 }},{{ hotel.longitude|float + 0.01 }},{{ hotel.latitude|float + 0.01 }}&layer=mapnik&marker={{ hotel.latitude }},{{ hotel.longitude }}">
+                </iframe>
+                {% else %}
+                    <p>Konum bilgisi bulunamadı.</p>
+                {% endif %}
+            </div>
+
+            <div class="transport-box">
+                <h3>Ulaşım Bilgileri</h3>
+
+                {% if hotel.distance %}
+                    <p><strong>Etkinlik konumuna uzaklık:</strong><br>{{ hotel.distance }} km</p>
+                {% endif %}
+
+                <p>
+                    <strong>Ulaşım önerisi:</strong><br>
+                    Otele ulaşım için toplu taşıma, taksi veya araç kiralama seçenekleri değerlendirilebilir.
+                </p>
+                 {% if hotel.latitude and hotel.longitude %}
+                 <a href="https://www.google.com/maps/dir/?api=1&destination={{ hotel.latitude }},{{ hotel.longitude }}"
+                 target="_blank"
+                 class="detail-btn">
+                 📍 Yol Tarifi Al
+                 </a>
+{% endif %}
+{% if event_latitude and event_longitude and hotel.latitude and hotel.longitude %}
+    <a href="https://www.google.com/maps/dir/?api=1&origin={{ event_latitude }},{{ event_longitude }}&destination={{ hotel.latitude }},{{ hotel.longitude }}"
+       target="_blank"
+       class="detail-btn">
+        📍 Etkinlikten Otele Yol Tarifi
+    </a>
+{% elif hotel.latitude and hotel.longitude %}
+    <a href="https://www.google.com/maps/dir/?api=1&destination={{ hotel.latitude }},{{ hotel.longitude }}"
+       target="_blank"
+       class="detail-btn">
+        📍 Otele Yol Tarifi
+    </a>
+{% endif %}
+                {% if hotel.link %}
+                    <a href="{{ hotel.link }}" target="_blank" class="detail-btn">
+                        Kaynakta Gör
+                    </a>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="hotel-sidebar">
+
+        <h1>{{ hotel.name }}</h1>
+
+        <p><strong>Konum:</strong> {{ hotel.country }}</p>
+
+        {% if hotel.type %}
+            <p><strong>Tatil Türü:</strong> {{ hotel.type }}</p>
+        {% endif %}
+
+        <div class="activities-box">
+            <h3>Öne Çıkanlar</h3>
+
+            <ul>
+                {% for act in hotel.activities %}
+                    <li>{{ act }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <p class="rating">
+            {% if hotel.rating == "Puan yok" or hotel.rating == "Puan bilgisi yok" %}
+                ⭐ Puan yok
+            {% else %}
+                ⭐ {{ hotel.rating }} / 5
+            {% endif %}
+        </p>
+
+        <p class="price">{{ hotel.price }}</p>
+
+        <a href="#" class="detail-btn">
+            Tatil Planına Ekle
+        </a>
+
+    </div>
+
+</section>
+
+</body>
+</html>

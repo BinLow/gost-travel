@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Go-st - Tatil Planlayıcı</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Go-st Logo">
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="{{ url_for('home') }}" class="active">Ana Sayfa</a></li>
+            <li><a href="#destinations">Keşfet</a></li>
+            <li><a href="{{ url_for('about') }}">Hakkımızda</a></li>
+            <li><a href="{{ url_for('contact') }}">İletişim</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hayalindeki Tatili Planla</h1>
+            <p>Nereye gitmek istediğini ve nasıl bir tatil aradığını seç, sana en uygun konaklama seçeneklerini sunalım.</p>
+        </div>
+    </section>
+
+<section class="search-box-wrapper">
+    <section class="search-box">
+        <form class="search-form" action="{{ url_for('results') }}" method="get" id="travel-form">
+
+            <input type="hidden" id="country" name="country">
+            <input type="hidden" id="vacation_type" name="vacation_type">
+            <input type="hidden" id="budget" name="budget">
+
+            <div class="search-item">
+                <label>Nereye?</label>
+                <div class="custom-select" data-input="country">
+                    <div class="custom-select-selected">
+                        <span>Ülke Seç</span><span>⌄</span>
+                    </div>
+                    <div class="custom-select-options">
+<div class="custom-option" data-value="İspanya">
+    <img src="{{ url_for('static', filename='images/flags/spain.png') }}">
+    <span>İspanya</span>
+</div>
+
+<div class="custom-option" data-value="İtalya">
+    <img src="{{ url_for('static', filename='images/flags/italy.png') }}">
+    <span>İtalya</span>
+</div>
+
+<div class="custom-option" data-value="Japonya">
+    <img src="{{ url_for('static', filename='images/flags/japan.png') }}">
+    <span>Japonya</span>
+</div>
+
+<div class="custom-option" data-value="Türkiye">
+    <img src="{{ url_for('static', filename='images/flags/turkey.png') }}">
+    <span>Türkiye</span>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-item">
+                <label>Tatil Türü</label>
+                <div class="custom-select" data-input="vacation_type">
+                    <div class="custom-select-selected">
+                        <span>Tatil Türü Seç</span><span>⌄</span>
+                    </div>
+                    <div class="custom-select-options">
+                        <div class="custom-option" data-value="Kafa Dinleme">
+                            <img src="{{ url_for('static', filename='images/icons/relax.png') }}"><span>Kafa Dinleme</span>
+                        </div>
+                        <div class="custom-option" data-value="Etkinlik Odaklı">
+                            <img src="{{ url_for('static', filename='images/icons/activity.png') }}"><span>Etkinlik Odaklı</span>
+                        </div>
+                        <div class="custom-option" data-value="Tarihi Gezi">
+                            <img src="{{ url_for('static', filename='images/icons/history.png') }}"><span>Tarihi Gezi</span>
+                        </div>
+                        <div class="custom-option" data-value="Kültür Tanıma">
+                            <img src="{{ url_for('static', filename='images/icons/culture.png') }}"><span>Kültür Tanıma</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="search-item">
+                <label>Bütçe</label>
+                <div class="custom-select" data-input="budget">
+                    <div class="custom-select-selected">
+                        <span>Bütçe Seç</span><span>⌄</span>
+                    </div>
+                    <div class="custom-select-options">
+                        <div class="custom-option budget-option" data-value="Düşük">
+    <span class="budget-icon">$</span>
+    <span>Düşük</span>
+</div>
+
+<div class="custom-option budget-option" data-value="Orta">
+    <span class="budget-icon">$$</span>
+    <span>Orta</span>
+</div>
+
+<div class="custom-option budget-option" data-value="Yüksek">
+    <span class="budget-icon">$$$</span>
+    <span>Yüksek</span>
+</div>
+                    </div>
+                </div>
+            </div>
+
+            <input type="hidden" id="event_latitude" name="event_latitude">
+            <input type="hidden" id="event_longitude" name="event_longitude">
+
+            <button type="submit" class="search-button">Ara</button>
+        </form>
+    </section>
+
+    <p id="form-warning" class="form-warning"></p>
+
+    <div id="event-map-wrapper" class="event-map-wrapper">
+        <p><strong>Etkinlik konumunu haritadan seçin:</strong></p>
+        <div id="event-map"></div>
+    </div>
+</section>
+
+    <p id="form-warning" class="form-warning"></p>
+
+    <div id="event-map-wrapper" class="event-map-wrapper">
+        <p><strong>Etkinlik konumunu haritadan seçin:</strong></p>
+        <div id="event-map"></div>
+    </div>
+</section>
+
+        <p id="form-warning" class="form-warning"></p>
+    </section>
+
+    <section class="why-us">
+    <h2>Neden Go-st?</h2>
+
+    <div class="card-container">
+        <div class="card">
+            <h3>Kolay Seçim</h3>
+            <p>Ülke, tatil türü ve bütçene göre hızlı öneriler al.</p>
+        </div>
+
+        <div class="card">
+            <h3>Kişiselleştirilmiş Sonuçlar</h3>
+            <p>Tercihlerine uygun otelleri ve tatil seçeneklerini keşfet.</p>
+        </div>
+
+        <div class="card">
+            <h3>Modern Deneyim</h3>
+            <p>Sade ve kullanıcı dostu arayüz ile planını kolayca oluştur.</p>
+        </div>
+    </div>
+</section>
+
+    <section id="destinations" class="destinations">
+        <h2>Popüler Destinasyonlar</h2>
+        <div class="card-container">
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/spain.jpg') }}" alt="İspanya">
+                <h3>İspanya</h3>
+                <p>Doğa ve huzur dolu bir tatil.</p>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/italy.jpg') }}" alt="İtalya">
+                <h3>İtalya</h3>
+                <p>Tarih ve kültürle dolu bir gezi.</p>
+            </div>
+
+            <div class="card">
+                <img src="{{ url_for('static', filename='images/japan.jpg') }}" alt="Japonya">
+                <h3>Japonya</h3>
+                <p>Gelenek ve modern yaşamın buluştuğu bir deneyim.</p>
+            </div>
+        </div>
+    </section>
+
+<section class="vacation-types">
+    <h2>Tatil Türleri</h2>
+
+    <div class="card-container">
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/icons/relax.png') }}" class="type-icon" alt="Kafa Dinleme">
+            <h3>Kafa Dinleme</h3>
+            <p>Sakin ve huzurlu ortamlar.</p>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/icons/activity.png') }}" class="type-icon" alt="Etkinlik Odaklı">
+            <h3>Etkinlik Odaklı</h3>
+            <p>Eğlence ve aktivitelerle dolu tatiller.</p>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/icons/history.png') }}" class="type-icon" alt="Tarihi Gezi">
+            <h3>Tarihi Gezi</h3>
+            <p>Tarihi yapılar ve geçmişin izleri.</p>
+        </div>
+
+        <div class="card">
+            <img src="{{ url_for('static', filename='images/icons/culture.png') }}" class="type-icon" alt="Kültür Tanıma">
+            <h3>Kültür Tanıma</h3>
+            <p>Yerel yaşamı ve kültürü keşfet.</p>
+        </div>
+    </div>
+</section>
+</main>
+
+<footer>
+    <p>&copy; 2026 Go-st - Tüm hakları saklıdır.</p>
+</footer>
+
+<script>
+    const form = document.getElementById("travel-form");
+    const country = document.getElementById("country");
+    const vacationType = document.getElementById("vacation_type");
+    const budget = document.getElementById("budget");
+    const warning = document.getElementById("form-warning");
+
+    form.addEventListener("submit", function(event) {
+        if (country.value === "" || vacationType.value === "" || budget.value === "") {
+            event.preventDefault();
+            warning.textContent = "Lütfen tüm alanları seçin.";
+        } else {
+            warning.textContent = "";
+        }
+    });
+</script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    const vacationSelect = document.getElementById("vacation_type");
+    const mapWrapper = document.getElementById("event-map-wrapper");
+    const eventLat = document.getElementById("event_latitude");
+    const eventLng = document.getElementById("event_longitude");
+
+    let eventMap;
+    let eventMarker;
+
+    mapWrapper.style.display = "none";
+
+    vacationSelect.addEventListener("change", function () {
+        if (vacationSelect.value === "Etkinlik Odaklı") {
+            mapWrapper.style.display = "block";
+
+            setTimeout(() => {
+                if (!eventMap) {
+                    eventMap = L.map("event-map").setView([41.3851, 2.1734], 12);
+
+                    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                        attribution: "© OpenStreetMap contributors"
+                    }).addTo(eventMap);
+
+                    eventMap.on("click", function (e) {
+                        const lat = e.latlng.lat;
+                        const lng = e.latlng.lng;
+
+                        eventLat.value = lat;
+                        eventLng.value = lng;
+
+                        if (eventMarker) {
+                            eventMarker.setLatLng(e.latlng);
+                        } else {
+                            eventMarker = L.marker(e.latlng).addTo(eventMap);
+                        }
+                    });
+                }
+
+                eventMap.invalidateSize();
+            }, 200);
+
+        } else {
+            mapWrapper.style.display = "none";
+            eventLat.value = "";
+            eventLng.value = "";
+        }
+    });
+</script>
+<script>
+    const customSelects = document.querySelectorAll(".custom-select");
+
+    customSelects.forEach(dropdown => {
+        const selected = dropdown.querySelector(".custom-select-selected");
+        const options = dropdown.querySelectorAll(".custom-option");
+        const inputId = dropdown.getAttribute("data-input");
+        const hiddenInput = document.getElementById(inputId);
+
+        selected.addEventListener("click", function () {
+            customSelects.forEach(item => {
+                if (item !== dropdown) item.classList.remove("open");
+            });
+
+            dropdown.classList.toggle("open");
+        });
+
+        options.forEach(option => {
+            option.addEventListener("click", function () {
+                const value = this.getAttribute("data-value");
+                const content = this.innerHTML;
+
+                hiddenInput.value = value;
+
+                selected.innerHTML = `
+                    <span style="display:flex; align-items:center; gap:8px;">
+                        ${content}
+                    </span>
+                    <span>⌄</span>
+                `;
+
+                dropdown.classList.remove("open");
+                hiddenInput.dispatchEvent(new Event("change"));
+            });
+        });
+    });
+
+    document.addEventListener("click", function (event) {
+        customSelects.forEach(dropdown => {
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove("open");
+            }
+        });
+    });
+</script>
+</script>
+</body>
+</html>

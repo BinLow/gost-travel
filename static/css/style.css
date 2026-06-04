@@ -1,0 +1,774 @@
+/* RESET */
+html {
+    scroll-behavior: smooth !important;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f5f0;
+    color: #222;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 32px;
+    background-color: #f7f5f0;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.logo img {
+    height: 48px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 26px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: #0f766e;
+    transition: 0.3s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+.nav-links a:hover {
+    color: #0d7a5f;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(135deg, #b8c9b2, #9eb39b);
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 100px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    top: -80px;
+    right: -80px;
+}
+
+.hero-content h1 {
+    font-size: 42px;
+    color: #0d5c48;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 700px;
+}
+
+/* SEARCH */
+.search-box-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -30px;
+    position: relative;
+    z-index: 10;
+}
+
+.search-box {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: white;
+    padding: 18px 24px;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+    transition: 0.3s;
+}
+
+.search-form:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.search-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 130px;
+    font-size: 13px;
+    color: #555;
+}
+
+.search-item label {
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+.search-item select {
+    margin-top: 5px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    cursor: pointer;
+    min-width: 120px;
+    transition: 0.2s;
+}
+
+.search-item select:focus {
+    border-color: #0f766e;
+    background: white;
+}
+
+.search-button {
+    background: #0f766e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.search-button:hover {
+    background: #115e59;
+    transform: scale(1.05);
+}
+
+.form-warning {
+    min-height: 20px;
+    margin-top: 10px;
+    color: #dc2626;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* SECTIONS */
+.destinations,
+.vacation-types,
+.why-us {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+/* CARDS */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: white;
+    width: 220px;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+}
+
+.card img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+/* RESULTS */
+.results-header {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.selected-filters {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.results-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px;
+    flex-wrap: wrap;
+}
+
+.hotel-card {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    width: 250px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.hotel-card:hover {
+    transform: translateY(-5px);
+}
+
+.hotel-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* DETAIL */
+.detail-container {
+    display: flex;
+    gap: 40px;
+    padding: 50px;
+    align-items: center;
+}
+
+.detail-container img {
+    width: 400px;
+    border-radius: 15px;
+}
+
+.detail-info {
+    max-width: 500px;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* BUTTON / LINK STYLES */
+button:hover {
+    opacity: 0.8;
+}
+
+.detail-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 16px;
+    background-color: #00674F;
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.detail-btn:hover {
+    opacity: 0.85;
+}
+
+/* EMPTY STATE */
+.empty-state {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    max-width: 420px;
+    margin: 30px auto;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 26px;
+    margin-top: 50px;
+    background-color: white;
+    border-top: 1px solid #e5e5e5;
+}
+
+.search-item select:hover {
+    border-color: #0f766e;
+}
+
+.hotel-card:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.hotel-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.hotel-card {
+    transition: all 0.3s ease;
+}
+
+footer {
+    text-align: center;
+    padding: 26px;
+    margin-top: 50px;
+    background-color: white;
+    border-top: 1px solid #e5e5e5;
+    color: #555;
+    font-size: 14px;
+}
+
+.rating {
+    color: #facc15;
+    font-weight: bold;
+}
+
+.nav-links a,
+.nav-links a:visited,
+.nav-links a:active {
+    color: #4b5563 !important;
+    text-decoration: none !important;
+}
+
+.nav-links a:hover {
+    color: #0d7a5f !important;
+}
+
+.empty-state {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f766e;
+    margin-top: 12px;
+}
+
+.rating {
+    color: #facc15;
+    font-weight: 600;
+}
+.result-count {
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+}
+
+.nav-links a.active {
+    color: #0f766e !important;
+    font-weight: bold;
+}
+
+.transport-box {
+    margin-top: 20px;
+    padding: 18px;
+    background-color: #f7f5f0;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.transport-box h3 {
+    margin-top: 0;
+    color: #0f766e;
+}
+
+.transport-box p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+.map-box {
+    margin-top: 20px;
+    padding: 18px;
+    background-color: #f7f5f0;
+    border-radius: 12px;
+    border: 1px solid #e5e5e5;
+}
+
+.map-box h3 {
+    margin-top: 0;
+    color: #0f766e;
+}
+/* =========================
+   HOTEL DETAIL NEW LAYOUT
+========================= */
+
+.hotel-layout {
+    display: flex;
+    gap: 30px;
+    padding: 40px;
+    align-items: flex-start;
+}
+
+/* SOL TARAF */
+.hotel-left {
+    flex: 1;
+}
+
+/* FOTO GALERİ */
+.gallery {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.gallery img {
+    width: 50%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* ALT ALAN */
+.bottom-section {
+    display: flex;
+    gap: 20px;
+}
+
+/* HARİTA */
+.map-box {
+    flex: 1.3;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.map-box h3 {
+    margin-bottom: 15px;
+    color: #0f766e;
+}
+
+/* ULAŞIM */
+.transport-box {
+    flex: 0.8;
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+}
+
+.transport-box h3 {
+    margin-bottom: 20px;
+    color: #0f766e;
+}
+
+.transport-box p {
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+/* SAĞ PANEL */
+.hotel-sidebar {
+    width: 340px;
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+
+    position: sticky;
+    top: 30px;
+}
+
+.hotel-sidebar h1 {
+    margin-bottom: 20px;
+    font-size: 32px;
+}
+
+.activities-box {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.activities-box ul {
+    padding-left: 20px;
+}
+
+.activities-box li {
+    margin-bottom: 10px;
+}
+
+/* PUAN */
+.rating {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #0f766e;
+}
+
+/* FİYAT */
+.hotel-card .price {
+    font-size: 22px;
+    line-height: 1.2;
+    min-height: 55px;
+}
+
+
+/* BUTON */
+.detail-btn {
+    display: inline-block;
+    margin-top: 30px;
+    width: 100%;
+    text-align: center;
+    padding: 16px;
+    border-radius: 14px;
+    background: #0f766e;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.detail-btn:hover {
+    background: #115e59;
+    transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+
+    .hotel-layout {
+        flex-direction: column;
+    }
+
+    .gallery {
+        flex-direction: column;
+    }
+
+    .gallery img {
+        width: 100%;
+    }
+
+    .bottom-section {
+        flex-direction: column;
+    }
+
+    .hotel-sidebar {
+        width: 100%;
+        position: static;
+    }
+}
+
+.event-map-wrapper {
+    margin-top: 20px;
+    background: white;
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    width: 700px;
+    max-width: 90%;
+    text-align: center;
+}
+
+#event-map {
+    height: 300px;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.type-icon {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    margin-bottom: 16px;
+    transition: 0.3s ease;
+}
+
+.card:hover .type-icon {
+    transform: scale(1.08);
+}
+
+.event-map-wrapper {
+    display: none;
+    margin-top: 20px;
+    background: white;
+    padding: 18px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    width: 700px;
+    max-width: 90%;
+    text-align: center;
+}
+
+#event-map {
+    height: 300px;
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 12px;
+}
+.custom-select {
+    position: relative;
+    min-width: 160px;
+    font-size: 14px;
+}
+
+.custom-select-selected {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px 12px;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.custom-select-selected:hover {
+    border-color: #0f766e;
+}
+
+.custom-select-options {
+    display: none;
+    position: absolute;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    overflow: hidden;
+    z-index: 999;
+}
+
+.custom-select.open .custom-select-options {
+    display: block;
+}
+
+.custom-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.custom-option:hover {
+    background: #f0f7f5;
+}
+
+.custom-option img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.type-icon {
+    margin-bottom: 18px;
+    transition: 0.3s ease;
+    opacity: 0.95;
+}
+
+.card:hover .type-icon {
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* Tatil türü kart iconları */
+.card img.type-icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 16px;
+}
+
+/* Arama dropdown seçili icon */
+.custom-select-selected img {
+    width: 22px !important;
+    height: 22px !important;
+    object-fit: contain;
+}
+
+/* Dropdown içindeki iconlar */
+.custom-option img {
+    width: 24px !important;
+    height: 24px !important;
+    object-fit: contain;
+}
+
+.budget-icon {
+    color: #0f766e;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.custom-option img,
+.custom-select-selected img {
+    width: 22px;
+    height: 22px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.hotel-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 430px;
+}
+
+.hotel-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.hotel-card .detail-btn {
+    margin-top: auto;
+    width: auto;
+}
+
+.hotel-country {
+    color: #666;
+    font-size: 15px;
+    margin-bottom: 8px;
+}
