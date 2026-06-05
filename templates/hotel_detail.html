@@ -28,7 +28,7 @@
 
         <div class="gallery">
             <img src="{{ hotel.image }}" alt="Hotel">
-            <img src="{{ hotel.image }}" alt="Hotel">
+
         </div>
 
         <div class="bottom-section">
@@ -74,11 +74,31 @@
         📍 Etkinlikten Otele Yol Tarifi
     </a>
 {% elif hotel.latitude and hotel.longitude %}
-    <a href="https://www.google.com/maps/dir/?api=1&destination={{ hotel.latitude }},{{ hotel.longitude }}"
-       target="_blank"
-       class="detail-btn">
-        📍 Otele Yol Tarifi
-    </a>
+ <div class="detail-buttons">
+
+    {% if event_latitude and event_longitude and hotel.latitude and hotel.longitude %}
+        <a href="https://www.google.com/maps/dir/?api=1&origin={{ event_latitude }},{{ event_longitude }}&destination={{ hotel.latitude }},{{ hotel.longitude }}"
+           target="_blank"
+           class="detail-btn">
+            📍 Etkinlikten Otele Yol Tarifi
+        </a>
+    {% endif %}
+
+    {% if hotel.latitude and hotel.longitude %}
+        <a href="https://www.google.com/maps/dir/?api=1&destination={{ hotel.latitude }},{{ hotel.longitude }}"
+           target="_blank"
+           class="detail-btn">
+            📍 Otele Yol Tarifi
+        </a>
+    {% endif %}
+
+    {% if hotel.link %}
+        <a href="{{ hotel.link }}" target="_blank" class="detail-btn">
+            Kaynakta Gör
+        </a>
+    {% endif %}
+
+</div>
 {% endif %}
                 {% if hotel.link %}
                     <a href="{{ hotel.link }}" target="_blank" class="detail-btn">

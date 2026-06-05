@@ -772,3 +772,45 @@ footer {
     font-size: 15px;
     margin-bottom: 8px;
 }
+
+.hotel-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-btn {
+    margin-top: auto;
+}
+
+.rating {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f59e0b;
+}
+
+.distance-info {
+    display: inline-block;
+    background: #e0f2fe;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+/* Detail sayfası ulaşım butonları */
+
+.detail-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+.detail-buttons .detail-btn {
+    width: 100%;
+    margin-top: 0;
+    padding: 14px 18px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 15px;
+}
