@@ -875,3 +875,44 @@ footer {
     border-radius: 14px;
     text-align: center;
 }
+
+.page-header{
+    text-align:center;
+    padding:60px 20px 30px;
+}
+
+.page-header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.page-header p{
+    color:#666;
+}
+
+.content-box{
+    max-width:900px;
+    margin:40px auto;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.explore-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+    padding:40px;
+}
+
+.explore-card{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.explore-card h2{
+    margin-bottom:15px;
+}
