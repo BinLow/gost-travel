@@ -858,3 +858,20 @@ footer {
     border-radius: 14px;
     text-align: center;
 }
+
+.transport-box .detail-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.transport-box .detail-buttons .detail-btn {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 16px 18px;
+    border-radius: 14px;
+    text-align: center;
+}
