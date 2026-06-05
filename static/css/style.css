@@ -841,3 +841,20 @@ footer {
 .transport-box .detail-buttons .detail-btn + .detail-btn {
     margin-top: 0 !important;
 }
+
+.transport-box .detail-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.transport-box .detail-buttons .detail-btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0 !important;
+    padding: 14px 18px;
+    border-radius: 14px;
+    text-align: center;
+}

@@ -53,7 +53,7 @@
 {% if hotel.rating == "Puan bilgisi yok" %}
     ⭐ Puan yok
 {% else %}
-    ⭐ {{ hotel.rating }} / 5
+    ⭐ {{ "%.1f"|format(hotel.rating|float) }} / 5
 {% endif %}
 </p>
                 {% if hotel.distance %}

@@ -99,15 +99,6 @@
     {% endif %}
 
 </div>
-{% endif %}
-                {% if hotel.link %}
-                    <a href="{{ hotel.link }}" target="_blank" class="detail-btn">
-                        Kaynakta Gör
-                    </a>
-                {% endif %}
-            </div>
-
-        </div>
     </div>
 
     <div class="hotel-sidebar">
@@ -134,7 +125,7 @@
             {% if hotel.rating == "Puan yok" or hotel.rating == "Puan bilgisi yok" %}
                 ⭐ Puan yok
             {% else %}
-                ⭐ {{ hotel.rating }} / 5
+                ⭐ {{ "%.1f"|format(hotel.rating|float) }} / 5
             {% endif %}
         </p>
 
