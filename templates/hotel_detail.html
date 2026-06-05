@@ -112,6 +112,10 @@
                 ⭐ {{ "%.1f"|format(hotel.rating|float) }} / 5
             {% endif %}
         </p>
+        <div class="hotel-meta">
+    <p>📝 {{ hotel.reviews }} değerlendirme</p>
+    <p>🏨 {{ hotel.hotel_class }}</p>
+</div>
 
         <p class="price">{{ hotel.price }}</p>
 

@@ -84,7 +84,11 @@ def get_hotels(country, event_latitude=None, event_longitude=None):
         image = ""
 
         if images:
-            image = images[0].get("thumbnail") or images[0].get("original_image", "")
+         image = (
+        images[0].get("original")
+        or images[0].get("thumbnail")
+        or ""
+    )
 
         gps = hotel.get("gps_coordinates", {})
         hotel_latitude = gps.get("latitude")
@@ -113,9 +117,9 @@ def get_hotels(country, event_latitude=None, event_longitude=None):
             "api_id": len(hotels),
             "name": hotel.get("name", "Otel"),
             "price": price,
-            "rating": rating if rating else "Puan yok",
+            "rating": rating if rating else "Puan yok","reviews": reviews,
+            "hotel_class": hotel.get("hotel_class", "Otel"),
             "reviews": reviews,
-            "hotel_class": hotel.get("hotel_class", ""),
             "image": image,
             "link": hotel.get("link", "#"),
             "latitude": hotel_latitude,
