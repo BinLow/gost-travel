@@ -37,18 +37,19 @@ def rating_value(hotel):
 
 
 def get_price(hotel):
-    price = None
+    total_price = hotel.get("total_price")
+    if isinstance(total_price, dict):
+        price = total_price.get("price_before_taxes")
+        if price:
+            return price
 
     price_per_night = hotel.get("price_per_night")
     if isinstance(price_per_night, dict):
         price = price_per_night.get("price_before_taxes")
+        if price:
+            return price
 
-    if not price:
-        total_price = hotel.get("total_price")
-        if isinstance(total_price, dict):
-            price = total_price.get("price_before_taxes")
-
-    return price
+    return None
 
 
 def get_hotels(country, event_latitude=None, event_longitude=None):
@@ -75,6 +76,9 @@ def get_hotels(country, event_latitude=None, event_longitude=None):
 
         price = get_price(hotel)
         rating = hotel.get("rating")
+        
+        reviews = hotel.get("reviews", 0)
+        hotel_class = hotel.get("extracted_hotel_class", 0)
 
         images = hotel.get("images", [])
         image = ""
@@ -87,7 +91,13 @@ def get_hotels(country, event_latitude=None, event_longitude=None):
         hotel_longitude = gps.get("longitude")
 
         if not image or not price or not rating:
-          continue
+         continue
+
+        if reviews < 100:
+             continue
+
+        if hotel_class and hotel_class < 3:
+         continue
 
         distance = None
 
@@ -104,6 +114,8 @@ def get_hotels(country, event_latitude=None, event_longitude=None):
             "name": hotel.get("name", "Otel"),
             "price": price,
             "rating": rating if rating else "Puan yok",
+            "reviews": reviews,
+            "hotel_class": hotel.get("hotel_class", ""),
             "image": image,
             "link": hotel.get("link", "#"),
             "latitude": hotel_latitude,
@@ -116,13 +128,14 @@ def get_hotels(country, event_latitude=None, event_longitude=None):
 
     if event_latitude and event_longitude:
         hotels.sort(
-            key=lambda hotel: (
-                hotel["distance"] if hotel["distance"] is not None else 999999,
-                -rating_value(hotel)
-            )
-        )
+         key=lambda hotel: (
+         hotel["distance"] if hotel["distance"] is not None else 999999,
+         -rating_value(hotel),
+         -hotel.get("reviews", 0)
+    )
+)
     else:
-        hotels.sort(key=lambda hotel: -rating_value(hotel))
+        hotels.sort(key=lambda hotel: (-rating_value(hotel), -hotel.get("reviews", 0)))
 
     hotels = hotels[:12]
 
