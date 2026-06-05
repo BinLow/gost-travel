@@ -814,3 +814,28 @@ footer {
     font-weight: 700;
     font-size: 15px;
 }
+
+.transport-box .detail-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.transport-box .detail-buttons .detail-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    margin: 0 !important;
+    padding: 13px 18px;
+
+    border-radius: 14px;
+    box-sizing: border-box;
+    line-height: 1.2;
+}
+
+.transport-box .detail-buttons .detail-btn + .detail-btn {
+    margin-top: 0 !important;
+}
